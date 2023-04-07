@@ -1,0 +1,24 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _express = _interopRequireDefault(require("express"));
+
+var _UserSettingsController = _interopRequireDefault(require("../Controller/UserSettingsController"));
+
+var _JwtVerify = _interopRequireDefault(require("../Middlewares/JwtVerify"));
+
+var _VerifyAdminScope = _interopRequireDefault(require("../Middlewares/VerifyAdminScope"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express.default.Router();
+
+router.put('', _JwtVerify.default, _UserSettingsController.default.update);
+router.post('/delete-history', _JwtVerify.default, _UserSettingsController.default.deleteBackup);
+var _default = router;
+exports.default = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9yb3V0ZXMvVXNlclNldHRpbmdzUm91dGVyLmpzIl0sIm5hbWVzIjpbInJvdXRlciIsImV4cHJlc3MiLCJSb3V0ZXIiLCJwdXQiLCJKd3RWZXJpZnkiLCJVc2VyU2V0dGluZ3MiLCJ1cGRhdGUiLCJwb3N0IiwiZGVsZXRlQmFja3VwIl0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQUE7O0FBRUE7O0FBQ0E7O0FBQ0E7Ozs7QUFIQSxJQUFNQSxNQUFNLEdBQUdDLGlCQUFRQyxNQUFSLEVBQWY7O0FBS0FGLE1BQU0sQ0FBQ0csR0FBUCxDQUFXLEVBQVgsRUFBZUMsa0JBQWYsRUFBMEJDLGdDQUFhQyxNQUF2QztBQUNBTixNQUFNLENBQUNPLElBQVAsQ0FBWSxpQkFBWixFQUErQkgsa0JBQS9CLEVBQTBDQyxnQ0FBYUcsWUFBdkQ7ZUFFZVIsTSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBleHByZXNzIGZyb20gJ2V4cHJlc3MnO1xuY29uc3Qgcm91dGVyID0gZXhwcmVzcy5Sb3V0ZXIoKTtcbmltcG9ydCBVc2VyU2V0dGluZ3MgZnJvbSAnLi4vQ29udHJvbGxlci9Vc2VyU2V0dGluZ3NDb250cm9sbGVyJztcbmltcG9ydCBKd3RWZXJpZnkgZnJvbSAnLi4vTWlkZGxld2FyZXMvSnd0VmVyaWZ5JztcbmltcG9ydCBWZXJpZnlBZG1pblNjb3BlIGZyb20gJy4uL01pZGRsZXdhcmVzL1ZlcmlmeUFkbWluU2NvcGUnO1xuXG5yb3V0ZXIucHV0KCcnLCBKd3RWZXJpZnksIFVzZXJTZXR0aW5ncy51cGRhdGUpO1xucm91dGVyLnBvc3QoJy9kZWxldGUtaGlzdG9yeScsIEp3dFZlcmlmeSwgVXNlclNldHRpbmdzLmRlbGV0ZUJhY2t1cCk7XG5cbmV4cG9ydCBkZWZhdWx0IHJvdXRlcjtcbiJdfQ==

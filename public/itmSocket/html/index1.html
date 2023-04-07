@@ -1,0 +1,26 @@
+
+
+
+
+<a href="javascript:" onclick="joinRoom()">JoinRoom</a>
+
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+<script>
+     var options = {
+            "force new connection": true,
+            reconnectionAttempt: "Infinity",
+            timeout: 10000,
+            transports: ["websocket"],
+        };
+        var socket_url = "https://stage.tasksplan.com:9000/";
+        var socket = io(socket_url, options);
+      function joinRoom()
+       {
+        socket.emit("dashboard",2);
+       }
+       socket.on("getDashboardData", (response, room_id) => {
+            console.log("data",response)
+       })
+</script>

@@ -1,0 +1,145 @@
+
+
+
+
+<a href="javascript:" onclick="joinRoom()">Dashboard</a><br>
+<a href="javascript:" onclick="imageDetail()">Image Detail</a><br>
+<a href="javascript:" onclick="watchlist()">WatchList</a><br>
+<a href="javascript:" onclick="fav()">Fav</a><br>
+<a href="javascript:" onclick="getportfolio()">Portfolio</a><br>
+<a href="javascript:" onclick="Search()">searchList</a><br>
+<a href="javascript:" onclick="imageDetailMultiple()">Image Multiple Detail</a><br>
+<a href="javascript:" onclick="liveTrading()">Live Trading</a><br>
+<a href="javascript:" onclick="buySale()">Buy Order</a><br>
+<a href="javascript:" onclick="buySale1()">Sale Order</a><br>
+<a href="javascript:" onclick="orderlist()"> Order list</a><br>
+<a href="javascript:" onclick="lounchedList()"> Lounched list</a><br>
+<a href="javascript:" onclick="changeUserType()"> changeUserType</a><br>
+<input type="text" placeholder="image id" id="image">
+<input type="text" placeholder="price" id="price">
+<input type="text" placeholder="qty" id="qty">
+<input type="text" placeholder="userId" id="userId">
+<input type="text" placeholder="type" id="type" value="">
+<input type="button" onclick="buysalecustom('buy')" value="buy">
+<input type="button" onclick="buysalecustom('sell')" value="sell">
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+<script>
+     var options = {
+            "force new connection": true,
+            reconnectionAttempt: "Infinity",
+            timeout: 10000,
+            transports: ["websocket"],
+        };
+        var socket_url = "https://stage.tasksplan.com:9000/";
+        var socket = io(socket_url, options);
+        function lounchedList()
+       {
+        socket.emit("lounchedList",40);
+       }  
+       function changeUserType()
+       {
+          socket.emit("changeUserType",40, "1"); 
+       }
+      function orderlist()
+       {
+        socket.emit("orderlist",40, "past", "pending");
+       }  
+       function buysalecustom(type)
+       {
+          let image=$("#image").val()
+          let userId=$("#userId").val()
+          let price=$("#price").val()
+          let qty=$("#qty").val()
+          let stockExId=$("#type").val()
+          if(!stockExId)
+          {
+               socket.emit("createOrder",image, type,userId, price, qty);
+          }
+          else{
+               socket.emit("updateOrder",stockExId,  price, qty,userId);
+          }
+        
+       } 
+        function buySale()
+       {
+        socket.emit("createOrder",1, "buy", 52, 561, 10);
+       } 
+       function buySale1()
+       {
+        socket.emit("createOrder",1, "sell", 52, 561, 10);
+       }   
+       function liveTrading()
+       {
+        socket.emit("livetrading",8,365);
+       } 
+         function joinRoom()
+       {
+        socket.emit("dashboard",40);
+       }  
+     function getportfolio()
+       {
+        socket.emit("portfolioDetail",40);
+       }  
+       function imageDetail()
+       {
+        socket.emit("tradingImageDetail",40,8);
+       } 
+       function watchlist()
+       {
+        socket.emit("watchlist",40);
+       }
+       function fav()
+       {
+        socket.emit("favImage",40,8);
+       } 
+       function Search()
+       {
+        socket.emit("searchList",40,"");
+       } 
+       function imageDetailMultiple()
+       {
+        socket.emit("tradingImageDetailMultiple",40,8);
+       }
+       socket.on("getOrderResponse", (response) => {
+            console.log("getOrderResponse",response)
+       })  
+       socket.on("getSearchData", (response) => {
+            console.log("getSearchData",response)
+       })
+       socket.on("getLiveTrading", (response) => {
+            console.log("getLiveTrading",response)
+       })
+       socket.on("getDashboardData", (response, room_id) => {
+            console.log("data",response)
+       })
+       socket.on("getTop", (response) => {
+            console.log("getTop",response)
+       })
+       socket.on("getUpcomming", (response) => {
+            console.log("getUpcomming",response)
+       }) 
+       socket.on("getTrading", (response) => {
+            console.log("getTrading",response)
+       })
+       socket.on("getWatchlist", (response) => {
+            console.log("getWatchlist",response)
+       })
+       socket.on("getImageDetail", (response) => {
+            console.log("getImageDetail",response)
+       })
+
+       socket.on("getPortfolio", (response) => {
+            console.log("getPortfolio",response)
+       }) 
+       socket.on("getImageDetailMultiple", (response) => {
+            console.log("getImageDetailMultiple",response)
+       })
+       socket.on("getOrderList", (response) => {
+            console.log("getOrderList",response)
+       })
+       socket.on("getLounchedList", (response) => {
+            console.log("getLounchedList",response)
+       })
+</script>
